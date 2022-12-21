@@ -2,8 +2,9 @@ package goemoji
 
 import (
 	"bufio"
+	"embed"
 	"fmt"
-	"os"
+	"io"
 	"strconv"
 	"strings"
 )
@@ -33,10 +34,14 @@ func (n *node) getNode(code int64) *node {
 	return nil
 }
 
+//go:embed official/emoji-sequences.txt
+//go:embed official/emoji-zwj-sequences.txt
+var fs embed.FS
+
 func readAllEmoji() (*node, error) {
 	tree := newDictTree()
 
-	seqFile, err := os.Open("official/emoji-sequences.txt")
+	seqFile, err := fs.Open("official/emoji-sequences.txt")
 	if seqFile != nil {
 		defer seqFile.Close()
 	}
@@ -49,7 +54,7 @@ func readAllEmoji() (*node, error) {
 		return nil, err
 	}
 
-	zwjFile, err := os.Open("official/emoji-zwj-sequences.txt")
+	zwjFile, err := fs.Open("official/emoji-zwj-sequences.txt")
 	if zwjFile != nil {
 		defer zwjFile.Close()
 	}
@@ -64,8 +69,8 @@ func readAllEmoji() (*node, error) {
 	return tree, nil
 }
 
-func convertOfficialEmoji(file *os.File, tree *node) error {
-	scanner := bufio.NewScanner(file)
+func convertOfficialEmoji(reader io.Reader, tree *node) error {
+	scanner := bufio.NewScanner(reader)
 	for scanner.Scan() {
 		line := scanner.Text()
 		if len(line) > 0 && line[0] != '#' {
