@@ -8,3 +8,7 @@ s := goemoji.HandleAll("👋(👨‍👩‍👧‍👧)(👨‍👩‍👧)(👨
 expected := "#(#)(#)(##"
 s == expected // true
 ```
+
+## License
+
+MIT License
