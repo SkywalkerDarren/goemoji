@@ -12,6 +12,7 @@ func init() {
 	tree = root
 }
 
+// HandleAll will call the handler function for each emoji and text
 func HandleAll(s string, emojiHandler HandlerFunc, textHandler HandlerFunc) {
 	next := tree
 	startText := 0
@@ -61,6 +62,7 @@ func HandleAll(s string, emojiHandler HandlerFunc, textHandler HandlerFunc) {
 	}
 }
 
+// ReplaceEmojis will replace all emojis with the replace function
 func ReplaceEmojis(s string, replaceFunc ReplaceFunc) string {
 	result := &strings.Builder{}
 	HandleAll(s, func(emoji string) {
@@ -71,6 +73,7 @@ func ReplaceEmojis(s string, replaceFunc ReplaceFunc) string {
 	return result.String()
 }
 
+// ReplaceText will replace all text with the replace function
 func ReplaceText(s string, replaceFunc ReplaceFunc) string {
 	result := &strings.Builder{}
 	HandleAll(s, func(emoji string) {
@@ -81,6 +84,7 @@ func ReplaceText(s string, replaceFunc ReplaceFunc) string {
 	return result.String()
 }
 
+// Replace will replace all emojis and text with the replace function
 func Replace(s string, replaceEmojiFunc ReplaceFunc, replaceTextFunc ReplaceFunc) string {
 	result := &strings.Builder{}
 	HandleAll(s, func(emoji string) {
@@ -91,6 +95,7 @@ func Replace(s string, replaceEmojiFunc ReplaceFunc, replaceTextFunc ReplaceFunc
 	return result.String()
 }
 
+// RemoveText will remove all text
 func RemoveText(s string) string {
 	result := &strings.Builder{}
 	HandleAll(s, func(emoji string) {
@@ -99,6 +104,7 @@ func RemoveText(s string) string {
 	return result.String()
 }
 
+// RemoveEmojis will remove all emojis
 func RemoveEmojis(s string) string {
 	result := &strings.Builder{}
 	HandleAll(s, func(emoji string) {}, func(text string) {
@@ -107,6 +113,7 @@ func RemoveEmojis(s string) string {
 	return result.String()
 }
 
+// Split will split the string into emojis and text
 func Split(s string, withEmoji bool) []string {
 	result := make([]string, 0)
 	HandleAll(s, func(emoji string) {
@@ -119,6 +126,7 @@ func Split(s string, withEmoji bool) []string {
 	return result
 }
 
+// Count will count the number of emojis
 func Count(s string) int {
 	i := 0
 	HandleAll(s, func(emoji string) {
