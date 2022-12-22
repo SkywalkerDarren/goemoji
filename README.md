@@ -1,4 +1,8 @@
 # goemoji😀
+![](https://github.com/SkywalkerDarren/goemoji/actions/workflows/go.yml/badge.svg)
+![](https://goreportcard.com/badge/github.com/SkywalkerDarren/goemoji)
+[![codecov](https://codecov.io/github/SkywalkerDarren/goemoji/branch/master/graph/badge.svg?token=OHSOGISA1M)](https://codecov.io/github/SkywalkerDarren/goemoji)
+
 🚀Fast and ✨simple way to handle text with 👍emoji
 
 ## Installing
