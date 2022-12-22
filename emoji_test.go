@@ -2,8 +2,9 @@ package goemoji_test
 
 import (
 	"fmt"
-	"goemoji"
 	"testing"
+
+	"github.com/SkywalkerDarren/goemoji"
 )
 
 type testItem struct {
