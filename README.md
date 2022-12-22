@@ -24,42 +24,43 @@ import (
 
 func main() {
 	raw := "emoji👋"
-	
+
 	r1 := goemoji.ReplaceEmojis(raw, func(s string) string {
-        return "(" + s + ")"
+		return "(" + s + ")"
 	})
 	fmt.Println(r1) // emoji(👋)
-	
+
 	r2 := goemoji.ReplaceText(raw, func(s string) string {
-        return "(" + s + ")"
-    })
+		return "(" + s + ")"
+	})
 	fmt.Println(r2) // (emoji)👋()
-	
+
 	r3 := goemoji.Replace(raw, func(s string) string {
-        return "{" + s + "}"
-    }, func(s string) string {
+		return "{" + s + "}"
+	}, func(s string) string {
 		return "(" + s + ")"
 	})
 	fmt.Println(r3) // (emoji){👋}()
-    
+
 	r4 := goemoji.RemoveText(raw)
-    fmt.Println(r4) // 👋
-	
+	fmt.Println(r4) // 👋
+
 	r5 := goemoji.RemoveEmojis(raw)
-    fmt.Println(r5) // emoji
+	fmt.Println(r5) // emoji
 
 	c := goemoji.Count(raw)
 	fmt.Println(c) // 1
 
 	s := goemoji.Split(raw, true)
 	fmt.Println(s) // [emoji 👋]
-	
+
 	goemoji.HandleAll(raw, func(emoji string) {
-        // do something with emoji
-    }, func(text string) {
-        // do something with text
-    })
+		// do something with emoji
+	}, func(text string) {
+		// do something with text
+	})
 }
+
 ```
 
 ## Performance
