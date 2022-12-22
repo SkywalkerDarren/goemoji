@@ -14,7 +14,6 @@ func init() {
 }
 
 func HandleAll(s string, emojiHandler ReplaceFunc, textHandler ReplaceFunc) string {
-
 	next := tree
 	inEmoji := false
 	start := 0
@@ -34,7 +33,7 @@ func HandleAll(s string, emojiHandler ReplaceFunc, textHandler ReplaceFunc) stri
 			inEmoji = false
 
 			result.WriteString(textHandler(sb.String()))
-			sb = &strings.Builder{}
+			sb.Reset()
 
 			emoji := s[start:end]
 			result.WriteString(emojiHandler(emoji))

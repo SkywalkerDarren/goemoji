@@ -1,14 +1,15 @@
-package goemoji
+package goemoji_test
 
 import (
 	"fmt"
+	"goemoji"
 	"testing"
 )
 
 type testItem struct {
 	input        string
-	replaceEmoji ReplaceFunc
-	replaceText  ReplaceFunc
+	replaceEmoji goemoji.ReplaceFunc
+	replaceText  goemoji.ReplaceFunc
 	output       string
 	count        int
 }
@@ -64,15 +65,47 @@ func TestReplaceAllEmoji(t *testing.T) {
 			output:       "(){👨🏼‍🤝‍👨🏿}(){👨🏼‍🤝‍👨🏿}(){👋}(){👨‍👩‍👧‍👧}",
 			count:        4,
 		},
+		{
+			input:        "\U0001F96F Hi \U0001F970",
+			replaceEmoji: func(emoji string) string { return "" },
+			replaceText:  func(text string) string { return text },
+			output:       " Hi ",
+			count:        2,
+		},
 	}
 
 	for _, item := range testItems {
-		s := HandleAll(item.input, item.replaceEmoji, item.replaceText)
+		s := goemoji.HandleAll(item.input, item.replaceEmoji, item.replaceText)
 		if s != item.output {
 			t.Errorf("expected %s, got %s", item.output, s)
 		}
-		if count := Count(item.input); count != item.count {
+		if count := goemoji.Count(item.input); count != item.count {
 			t.Errorf("expected %d, got %d", item.count, count)
 		}
 	}
+}
+
+func BenchmarkEmoji(b *testing.B) {
+	item := testItem{
+		input:        "說 Hi 殺",
+		replaceEmoji: func(emoji string) string { return "" },
+		replaceText:  func(text string) string { return text },
+	}
+
+	for i := 0; i < b.N; i++ {
+		goemoji.HandleAll(item.input, item.replaceEmoji, item.replaceText)
+	}
+}
+
+func BenchmarkEmojiParallel(b *testing.B) {
+	item := testItem{
+		input:        "說 Hi 殺",
+		replaceEmoji: func(emoji string) string { return "" },
+		replaceText:  func(text string) string { return text },
+	}
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			goemoji.HandleAll(item.input, item.replaceEmoji, item.replaceText)
+		}
+	})
 }
