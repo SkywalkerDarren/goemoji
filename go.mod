@@ -1,3 +1,3 @@
-module github.com/Skywalkerdarren/goemoji
+module github.com/SkywalkerDarren/goemoji
 
 go 1.19
