@@ -1,5 +1,5 @@
-# goemoji
-🚀Fast and ✨simple way to handle text with emoji
+# goemoji😀
+🚀Fast and ✨simple way to handle text with 👍emoji
 
 ## Installing
 
