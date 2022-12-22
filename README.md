@@ -1,18 +1,28 @@
 # goemoji
-Simple way to handle text with emoji
+🚀Fast and ✨simple way to handle text with emoji
 
-## Usage
-
-### Installing
+## Installing
 
 ```bash
 $ go get -u github.com/SkywalkerDarren/goemoji
 ```
 
+## Usage
+
 ```go
-s := goemoji.HandleAll("👋(👨‍👩‍👧‍👧)(👨‍👩‍👧)(👨🏼‍🤝‍👨🏿👨🏼‍🤝‍👨🏿", func(emoji string) string { return "#" }, func(text string) string { return text })
-expected := "#(#)(#)(##"
-s == expected // true
+package main
+
+import (
+	"fmt"
+
+	"github.com/SkywalkerDarren/goemoji"
+)
+
+func main() {
+	s := goemoji.HandleAll("👋(👨‍👩‍👧‍👧)(👨‍👩‍👧)(👨🏼‍🤝‍👨🏿👨🏼‍🤝‍👨🏿", func(emoji string) string { return "#" }, func(text string) string { return text })
+	expected := "#(#)(#)(##"
+	fmt.Println(s == expected) // true
+}
 ```
 
 ## Performance
