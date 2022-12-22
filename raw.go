@@ -10,23 +10,23 @@ import (
 )
 
 func newDictTree() *node {
-	return &node{NodeMap: make(map[int64]node)}
+	return &node{NodeMap: make(map[int]node)}
 }
 
 type node struct {
-	Char    int64
+	Char    int
 	IsEnd   bool
-	NodeMap map[int64]node
+	NodeMap map[int]node
 }
 
-func (n *node) addNode(code int64, isEnd bool) {
+func (n *node) addNode(code int, isEnd bool) {
 	_, ok := n.NodeMap[code]
 	if !ok {
-		n.NodeMap[code] = node{Char: code, NodeMap: make(map[int64]node), IsEnd: isEnd}
+		n.NodeMap[code] = node{Char: code, NodeMap: make(map[int]node), IsEnd: isEnd}
 	}
 }
 
-func (n *node) getNode(code int64) *node {
+func (n *node) getNode(code int) *node {
 	node, ok := n.NodeMap[code]
 	if ok {
 		return &node
@@ -95,24 +95,24 @@ func handleCodes(codeList []string, root *node) error {
 			if len(codeList) > 1 {
 				return fmt.Errorf("code range error: %v", codeRange)
 			}
-			a, err := strconv.ParseInt(code[0], 16, 64)
+			a, err := strconv.ParseInt(code[0], 16, 32)
 			if err != nil {
 				return err
 			}
-			b, err := strconv.ParseInt(code[1], 16, 64)
+			b, err := strconv.ParseInt(code[1], 16, 32)
 			if err != nil {
 				return err
 			}
 			for i := a; i <= b; i++ {
-				next.addNode(i, true)
+				next.addNode(int(i), true)
 			}
 		} else {
-			a, err := strconv.ParseInt(code[0], 16, 64)
+			a, err := strconv.ParseInt(code[0], 16, 32)
 			if err != nil {
 				return err
 			}
-			next.addNode(a, i == l-1)
-			next = next.getNode(a)
+			next.addNode(int(a), i == l-1)
+			next = next.getNode(int(a))
 		}
 	}
 	return nil
