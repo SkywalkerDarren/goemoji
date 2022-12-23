@@ -71,35 +71,35 @@ goos: darwin
 goarch: arm64
 pkg: github.com/SkywalkerDarren/goemoji
 BenchmarkRemoveEmojis
-BenchmarkRemoveEmojis-8                  4751536               244.5 ns/op           160 B/op          7 allocs/op
+BenchmarkRemoveEmojis-8                  9397803               127.2 ns/op            16 B/op          1 allocs/op
 BenchmarkRemoveEmojisParallel
-BenchmarkRemoveEmojisParallel-8         12941796                93.93 ns/op          160 B/op          7 allocs/op
+BenchmarkRemoveEmojisParallel-8         38755568                30.46 ns/op           16 B/op          1 allocs/op
 BenchmarkRemoveText
-BenchmarkRemoveText-8                    5370500               219.4 ns/op           144 B/op          6 allocs/op
+BenchmarkRemoveText-8                   10777095               111.2 ns/op             0 B/op          0 allocs/op
 BenchmarkRemoveTextParallel
-BenchmarkRemoveTextParallel-8           14664808                81.95 ns/op          144 B/op          6 allocs/op
+BenchmarkRemoveTextParallel-8           51726182                22.37 ns/op            0 B/op          0 allocs/op
 BenchmarkReplaceEmojis
-BenchmarkReplaceEmojis-8                 4845986               252.3 ns/op           160 B/op          7 allocs/op
+BenchmarkReplaceEmojis-8                 9324697               128.1 ns/op            16 B/op          1 allocs/op
 BenchmarkReplaceEmojisParallel
-BenchmarkReplaceEmojisParallel-8        12617378                92.83 ns/op          160 B/op          7 allocs/op
+BenchmarkReplaceEmojisParallel-8        35846263                29.12 ns/op           16 B/op          1 allocs/op
 BenchmarkReplaceText
-BenchmarkReplaceText-8                   4910674               242.0 ns/op           152 B/op          7 allocs/op
+BenchmarkReplaceText-8                   9069320               131.8 ns/op             8 B/op          1 allocs/op
 BenchmarkReplaceTextParallel
-BenchmarkReplaceTextParallel-8          12957044               101.2 ns/op           152 B/op          7 allocs/op
+BenchmarkReplaceTextParallel-8          41602144                27.75 ns/op            8 B/op          1 allocs/op
 BenchmarkReplace
-BenchmarkReplace-8                       4801255               231.6 ns/op           144 B/op          6 allocs/op
+BenchmarkReplace-8                      10482950               114.5 ns/op             0 B/op          0 allocs/op
 BenchmarkReplaceParallel
-BenchmarkReplaceParallel-8              13167669               105.1 ns/op           144 B/op          6 allocs/op
+BenchmarkReplaceParallel-8              49429840                22.93 ns/op            0 B/op          0 allocs/op
 BenchmarkSplit
-BenchmarkSplit-8                         4740147               254.9 ns/op           160 B/op          7 allocs/op
+BenchmarkSplit-8                         8971143               133.5 ns/op            16 B/op          1 allocs/op
 BenchmarkSplitParallel
-BenchmarkSplitParallel-8                12324456                93.58 ns/op          160 B/op          7 allocs/op
+BenchmarkSplitParallel-8                38264695                30.21 ns/op           16 B/op          1 allocs/op
 BenchmarkCount
-BenchmarkCount-8                         5459313               219.7 ns/op           144 B/op          6 allocs/op
+BenchmarkCount-8                         1587834               755.5 ns/op             0 B/op          0 allocs/op
 BenchmarkCountParallel
-BenchmarkCountParallel-8                14243266                83.16 ns/op          144 B/op          6 allocs/op
+BenchmarkCountParallel-8                54065012                22.56 ns/op            0 B/op          0 allocs/op
 PASS
-ok      github.com/SkywalkerDarren/goemoji      19.363s
+ok      github.com/SkywalkerDarren/goemoji      19.516s
 ```
 
 ## License
