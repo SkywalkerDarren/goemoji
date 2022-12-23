@@ -10,26 +10,26 @@ import (
 )
 
 func newDictTree() *node {
-	return &node{NodeMap: make(map[int]node)}
+	return &node{NodeMap: make(map[int]*node)}
 }
 
 type node struct {
 	Char    int
 	IsEnd   bool
-	NodeMap map[int]node
+	NodeMap map[int]*node
 }
 
 func (n *node) addNode(code int, isEnd bool) {
 	_, ok := n.NodeMap[code]
 	if !ok {
-		n.NodeMap[code] = node{Char: code, NodeMap: make(map[int]node), IsEnd: isEnd}
+		n.NodeMap[code] = &node{Char: code, NodeMap: make(map[int]*node), IsEnd: isEnd}
 	}
 }
 
 func (n *node) getNode(code int) *node {
 	node, ok := n.NodeMap[code]
 	if ok {
-		return &node
+		return node
 	}
 	return nil
 }
