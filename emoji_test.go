@@ -13,6 +13,14 @@ func TestRemoveEmojis(t *testing.T) {
 	}
 	testItems := []testItem{
 		{
+			input:  "!@#😀👩‍👩‍👧‍👧123",
+			output: "!@#123",
+		},
+		{
+			input:  "!@#123",
+			output: "!@#123",
+		},
+		{
 			input:  "",
 			output: "",
 		},
@@ -104,6 +112,14 @@ func TestRemoveText(t *testing.T) {
 	}
 	testItems := []testItem{
 		{
+			input:  "!@#😀👩‍👩‍👧‍👧123",
+			output: "😀👩‍👩‍👧‍👧",
+		},
+		{
+			input:  "!@#123",
+			output: "",
+		},
+		{
 			input:  "",
 			output: "",
 		},
@@ -194,6 +210,14 @@ func TestReplaceEmojis(t *testing.T) {
 		output string
 	}
 	testItems := []testItem{
+		{
+			input:  "!@#😀👩‍👩‍👧‍👧123",
+			output: "!@###123",
+		},
+		{
+			input:  "!@#123",
+			output: "!@#123",
+		},
 		{
 			input:  "",
 			output: "",
@@ -292,6 +316,14 @@ func TestReplaceText(t *testing.T) {
 	}
 	testItems := []testItem{
 		{
+			input:  "!@#😀👩‍👩‍👧‍👧123",
+			output: "#😀#👩‍👩‍👧‍👧#",
+		},
+		{
+			input:  "!@#123",
+			output: "#",
+		},
+		{
 			input:  "",
 			output: "#",
 		},
@@ -388,6 +420,14 @@ func TestReplace(t *testing.T) {
 		output string
 	}
 	testItems := []testItem{
+		{
+			input:  "!@#😀👩‍👩‍👧‍👧123",
+			output: "{!@#}(😀){}(👩‍👩‍👧‍👧){123}",
+		},
+		{
+			input:  "!@#123",
+			output: "{!@#123}",
+		},
 		{
 			input:  "",
 			output: "{}",
@@ -493,6 +533,16 @@ func TestSplit(t *testing.T) {
 	}
 	testItems := []testItem{
 		{
+			input:      "!@#😀👩‍👩‍👧‍👧123",
+			withEmojis: true,
+			output:     []string{"!@#", "😀", "", "👩‍👩‍👧‍👧", "123"},
+		},
+		{
+			input:      "!@#123",
+			withEmojis: true,
+			output:     []string{"!@#123"},
+		},
+		{
 			input:      "",
 			withEmojis: true,
 			output:     []string{""},
@@ -546,6 +596,16 @@ func TestSplit(t *testing.T) {
 			input:      "\U0001F96F Hi \U0001F970",
 			withEmojis: true,
 			output:     []string{"", "🥯", " Hi ", "🥰", ""},
+		},
+		{
+			input:      "!@#😀👩‍👩‍👧‍👧123",
+			withEmojis: false,
+			output:     []string{"!@#", "", "123"},
+		},
+		{
+			input:      "!@#123",
+			withEmojis: false,
+			output:     []string{"!@#123"},
 		},
 		{
 			input:      "",
@@ -656,6 +716,14 @@ func TestCount(t *testing.T) {
 		output int
 	}
 	testItems := []testItem{
+		{
+			input:  "!@#😀👩‍👩‍👧‍👧123",
+			output: 2,
+		},
+		{
+			input:  "!@#123",
+			output: 0,
+		},
 		{
 			input:  "",
 			output: 0,

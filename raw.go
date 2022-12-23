@@ -74,7 +74,9 @@ func convertOfficialEmoji(reader io.Reader, tree *node) error {
 	for scanner.Scan() {
 		line := scanner.Text()
 		if len(line) > 0 && line[0] != '#' {
-			codeList := strings.Split(strings.TrimSpace(strings.Split(line, ";")[0]), " ")
+			line = line[:strings.Index(line, ";")]
+			line = strings.TrimRight(line, " ")
+			codeList := strings.Split(line, " ")
 			if len(codeList) > 0 {
 				err := handleCodes(codeList, tree)
 				if err != nil {
@@ -90,16 +92,16 @@ func handleCodes(codeList []string, root *node) error {
 	next := root
 	l := len(codeList)
 	for i, codeRange := range codeList {
-		code := strings.Split(codeRange, "..")
-		if len(code) != 1 {
+		start, end, found := strings.Cut(codeRange, "..")
+		if found {
 			if len(codeList) > 1 {
 				return fmt.Errorf("code range error: %v", codeRange)
 			}
-			a, err := strconv.ParseInt(code[0], 16, 32)
+			a, err := strconv.ParseInt(start, 16, 32)
 			if err != nil {
 				return err
 			}
-			b, err := strconv.ParseInt(code[1], 16, 32)
+			b, err := strconv.ParseInt(end, 16, 32)
 			if err != nil {
 				return err
 			}
@@ -107,7 +109,7 @@ func handleCodes(codeList []string, root *node) error {
 				next.addNode(int(i), true)
 			}
 		} else {
-			a, err := strconv.ParseInt(code[0], 16, 32)
+			a, err := strconv.ParseInt(start, 16, 32)
 			if err != nil {
 				return err
 			}

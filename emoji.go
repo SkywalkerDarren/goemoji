@@ -20,6 +20,7 @@ func HandleAll(s string, emojiHandler HandlerFunc, textHandler HandlerFunc) {
 	inEmoji := false
 	startEmoji := 0
 	endEmoji := 0
+	isEmoji := false
 	for i, c := range s {
 		next = next.getNode(int(c))
 		if next != nil {
@@ -27,15 +28,19 @@ func HandleAll(s string, emojiHandler HandlerFunc, textHandler HandlerFunc) {
 				startEmoji = i
 			}
 			inEmoji = true
+			isEmoji = next.IsEnd
 		}
 		if next == nil && inEmoji {
-			endEmoji = i
 			inEmoji = false
-			text := s[startText:endText]
-			textHandler(text)
-			emojiHandler(s[startEmoji:endEmoji])
-			startText = i
+			if isEmoji {
+				endEmoji = i
+				text := s[startText:endText]
+				textHandler(text)
+				emojiHandler(s[startEmoji:endEmoji])
+				startText = i
+			}
 			endText = i
+			isEmoji = false
 		}
 		if next == nil {
 			next = tree
@@ -45,6 +50,7 @@ func HandleAll(s string, emojiHandler HandlerFunc, textHandler HandlerFunc) {
 					startEmoji = i
 				}
 				inEmoji = true
+				isEmoji = next.IsEnd
 			}
 		}
 		if !inEmoji {
