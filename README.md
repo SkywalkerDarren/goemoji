@@ -3,7 +3,8 @@
 ![](https://goreportcard.com/badge/github.com/SkywalkerDarren/goemoji)
 [![codecov](https://codecov.io/github/SkywalkerDarren/goemoji/branch/master/graph/badge.svg?token=OHSOGISA1M)](https://codecov.io/github/SkywalkerDarren/goemoji)
 
-🚀Fast and ✨simple way to handle text with 👍emoji
+🚀Fast and ✨simple way to handle text with 👍emoji.
+
 Support unicode emoji 15.0
 
 ## Installing
