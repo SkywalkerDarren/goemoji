@@ -8,11 +8,16 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
+  schedule:
+    - cron: '0 3 1 * *'
+  workflow_dispatch:
 
 jobs:
 
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
     - uses: actions/checkout@v3
 
@@ -20,6 +25,14 @@ jobs:
       uses: actions/setup-go@v3
       with:
         go-version: 1.19
+    
+    - name: Download emoji sequence files to official directory
+      run: |
+        # Ensure official directory exists
+        mkdir -p official
+        # Download files to official directory
+        curl -o official/emoji-sequences.txt https://raw.githubusercontent.com/unicode-org/icu/refs/heads/main/icu4c/source/data/unidata/emoji-sequences.txt
+        curl -o official/emoji-zwj-sequences.txt https://raw.githubusercontent.com/unicode-org/icu/refs/heads/main/icu4c/source/data/unidata/emoji-zwj-sequences.txt
 
     - name: Build
       run: go build -v ./...
@@ -32,3 +45,24 @@ jobs:
     
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
+    
+    - name: Check changes and commit
+      # Only execute commit operation on schedule or manual trigger
+      if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+      run: |
+        git config --global user.name 'GitHub Action'
+        git config --global user.email 'action@github.com'
+        
+        # Add files to staging area
+        git add official/emoji-sequences.txt official/emoji-zwj-sequences.txt
+        
+        # Check if there are changes
+        if git diff --staged --quiet; then
+          echo "No changes to commit"
+          exit 0
+        fi
+        
+        # Commit changes
+        git commit -m "Auto update emoji data files $(date +'%Y-%m-%d')"
+        # Push using GitHub provided token
+        git push origin HEAD:${GITHUB_REF#refs/heads/}
