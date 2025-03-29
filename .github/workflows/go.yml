@@ -44,7 +44,7 @@ jobs:
       run: go test -race -coverprofile=coverage.txt -covermode=atomic ./...
     
     - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v5.4.0
     
     - name: Check changes and commit
       # Only execute commit operation on schedule or manual trigger
