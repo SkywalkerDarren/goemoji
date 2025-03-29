@@ -7,6 +7,8 @@
 # Emoji Sequence Data for UTS #51
 # Version: 16.0
 #
+# For documentation and usage, see https://www.unicode.org/reports/tr51
+#
 # Format:
 #   code_point(s) ; type_field ; description # comments
 # Fields:
